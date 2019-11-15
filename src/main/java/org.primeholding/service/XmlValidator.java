@@ -1,14 +1,10 @@
 package org.primeholding.service;
 
-import org.xml.sax.SAXException;
-
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
 public class XmlValidator {
@@ -19,14 +15,7 @@ public class XmlValidator {
             Schema schema = factory.newSchema(new StreamSource(inputStreamSchema));
             Validator validator = schema.newValidator();
             validator.validate(new StreamSource(inputStreamXML));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        } catch (SAXException e) {
-            e.printStackTrace();
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
             return false;
         }
         return true;

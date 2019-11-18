@@ -8,18 +8,17 @@ import java.io.File;
 
 public class XmlParser {
 
-    public static <T> T Parse(File file, Class<T> clazz){
+    public static <T> T Parse(File file, Class<T> clazz) {
 
         JAXBContext jaxbContext;
-        {
-            try {
-                jaxbContext = JAXBContext.newInstance(clazz);
-                Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-                return (T) jaxbUnmarshaller.unmarshal(file);
 
-            } catch (JAXBException e) {
-                e.printStackTrace();
-            }
+        try {
+            jaxbContext = JAXBContext.newInstance(clazz);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            return (T) jaxbUnmarshaller.unmarshal(file);
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
         }
 
         return null;

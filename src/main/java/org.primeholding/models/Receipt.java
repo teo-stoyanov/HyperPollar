@@ -42,8 +42,6 @@ public class Receipt {
         this.totalPrice = totalPrice;
     }
 
-
-
     public String getPaymentType() {
         return this.paymentType;
     }

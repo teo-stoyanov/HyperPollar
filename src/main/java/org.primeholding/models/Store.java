@@ -7,11 +7,14 @@ import java.util.List;
 public class Store {
     @XmlAttribute
     private String name;
+
     @XmlAttribute
     private String address;
+
     @XmlElementWrapper(name="receipts")
     @XmlElement (name = "receipt")
     private List<Receipt> receipts;
+
     @XmlElementWrapper(name="invoices")
     @XmlElement (name = "invoice")
     private List<Invoice> invoices;

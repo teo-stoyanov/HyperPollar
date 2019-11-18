@@ -1,0 +1,40 @@
+<company name="Aleks Trade 2010" address="Plovdiv, Bogomil 58" uuid="200978413">
+    <stores>
+        <store name="Leksi" address="Plovdiv, Marica 19">
+            <receipts>
+                <receipt>
+                    <total>15.71</total>
+                    <datetime>2019-07-30 19:11:12</datetime>
+                    <payment>cash</payment>
+                </receipt>
+                <receipt>
+                    <total>6.68</total>
+                    <datetime>2019-07-30 21:09:40</datetime>
+                    <payment>card</payment>
+                    <carddetails>
+                        <cardtype>Visa</cardtype>
+                        <number>5168</number>
+                        <contactless>true</contactless>
+                    </carddetails>
+                </receipt>
+                <receipt>
+                    <total>11.14</total>
+                    <datetime>2019-07-30 23:07:58</datetime>
+                    <payment>cash</payment>
+                </receipt>
+            </receipts>
+            <invoices>
+                <invoice>
+                    <total>11.14</total>
+                    <datetime>2019-07-30 23:07:58</datetime>
+                    <payment>cash</payment>
+                    <customer>
+                        <name>Ivan</name>
+                        <address>Maritsa 5</address>
+                        <uuid>1233456</uuid>
+                    </customer>
+                </invoice>
+            </invoices>
+        </store>
+    </stores>
+</company>

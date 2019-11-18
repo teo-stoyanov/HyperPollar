@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="company">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="stores">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element  maxOccurs="unbounded" name="store">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="receipts">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element maxOccurs="unbounded" name="receipt">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="total" type="xs:decimal" />
+                                                                <xs:element name="datetime" type="xs:string" />
+                                                                <xs:element name="payment" type="xs:string" />
+                                                                <xs:element minOccurs="0" name="carddetails">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="cardtype" type="xs:string" />
+                                                                            <xs:element name="number" type="xs:unsignedShort" />
+                                                                            <xs:element name="contactless" type="xs:boolean" />
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element  name="invoices">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element maxOccurs="unbounded" name="invoice">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="total" type="xs:decimal" />
+                                                                <xs:element name="datetime" type="xs:string" />
+                                                                <xs:element name="payment" type="xs:string" />
+                                                                <xs:element name="customer">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="name" type="xs:string" />
+                                                                            <xs:element name="address" type="xs:string" />
+                                                                            <xs:element name="uuid" type="xs:unsignedInt" />
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="name" type="xs:string" use="required" />
+                                    <xs:attribute name="address" type="xs:string" use="required" />
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="address" type="xs:string" use="required" />
+            <xs:attribute name="uuid" type="xs:unsignedInt" use="required" />
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

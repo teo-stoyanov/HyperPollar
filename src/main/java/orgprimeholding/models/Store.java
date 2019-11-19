@@ -1,4 +1,4 @@
-package org.primeholding.models;
+package orgprimeholding.models;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;
@@ -20,6 +20,7 @@ public class Store {
     private List<Invoice> invoices;
 
     public Store() {
+        /* JAXB need an non-arg constructor for unmarshalling */
     }
 
     public Store(String name, String address) {

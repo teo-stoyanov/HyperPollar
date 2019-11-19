@@ -1,4 +1,4 @@
-package org.primeholding.service;
+package orgprimeholding.service.validators;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;
@@ -8,6 +8,9 @@ import javax.xml.validation.Validator;
 import java.io.InputStream;
 
 public class XmlValidator {
+    private XmlValidator() {
+    }
+
     public static boolean validate(InputStream inputStreamSchema, InputStream inputStreamXML) {
         try {
             SchemaFactory factory =

@@ -1,21 +1,27 @@
-package org.primeholding.models;
+package orgprimeholding.models;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.*;
+import java.util.List;
 
+@XmlRootElement(name = "company")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Customer {
-    @XmlElement (name = "name")
+public class Company {
+
+    @XmlAttribute
     private String name;
 
-    @XmlElement(name = "address")
+    @XmlAttribute
     private String address;
 
-    @XmlElement (name = "uuid")
+    @XmlAttribute
     private String uuid;
 
-    public Customer() {
+    @XmlElementWrapper(name="stores")
+    @XmlElement(name="store")
+    private List<Store> stores;
+
+    public Company() {
+        /* JAXB need an non-arg constructor for unmarshalling */
     }
 
     public String getName() {
@@ -40,5 +46,13 @@ public class Customer {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public List<Store> getStores() {
+        return this.stores;
+    }
+
+    public void setStores(List<Store> stores) {
+        this.stores = stores;
     }
 }

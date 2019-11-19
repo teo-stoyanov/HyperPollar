@@ -1,4 +1,4 @@
-package org.primeholding.service;
+package orgprimeholding.service.parsers;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.time.LocalDateTime;

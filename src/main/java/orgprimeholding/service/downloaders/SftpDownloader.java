@@ -1,4 +1,4 @@
-package org.primeholding.service;
+package orgprimeholding.service.downloaders;
 
 import com.jcraft.jsch.*;
 
@@ -10,6 +10,9 @@ import java.util.logging.Logger;
 
 public class SftpDownloader {
     private static final Logger LOGGER = Logger.getLogger(SftpDownloader.class.getName());
+
+    private SftpDownloader() {
+    }
 
     public static void downloadFiles(String username, String remoteHost, String password, String remoteDir, String localDir) {
         LOGGER.setLevel(Level.ALL);

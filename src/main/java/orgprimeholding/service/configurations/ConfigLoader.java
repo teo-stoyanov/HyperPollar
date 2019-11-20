@@ -1,7 +1,10 @@
 package orgprimeholding.service.configurations;
 
+import com.sun.corba.se.spi.orbutil.fsm.Input;
+
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
@@ -13,7 +16,7 @@ public class ConfigLoader {
     private ConfigLoader() {
     }
 
-    public static Properties getProperties(String configPath) {
+    public static Properties getProperties(InputStream configPath) {
         LOGGER.setLevel(Level.ALL);
         ConsoleHandler handler = new ConsoleHandler();
         handler.setLevel(Level.ALL);
@@ -21,7 +24,7 @@ public class ConfigLoader {
 
         try {
             Properties properties = new Properties();
-            properties.load(new FileInputStream(configPath));
+            properties.load(configPath);
             return properties;
         } catch (IOException e) {
             LOGGER.log(Level.ALL, e.getMessage(), e);

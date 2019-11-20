@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 
 public class DateAdapter extends XmlAdapter<String, LocalDateTime> {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 
     @Override
     public LocalDateTime unmarshal(String v) throws Exception {

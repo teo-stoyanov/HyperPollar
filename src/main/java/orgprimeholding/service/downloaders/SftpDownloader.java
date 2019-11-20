@@ -1,10 +1,13 @@
 package orgprimeholding.service.downloaders;
 
-import com.jcraft.jsch.*;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpException;
 
 import java.io.File;
 import java.util.List;
-import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,10 +18,6 @@ public class SftpDownloader {
     }
 
     public static void downloadFiles(String username, String remoteHost, String password, String remoteDir, String localDir) {
-        LOGGER.setLevel(Level.ALL);
-        ConsoleHandler handler = new ConsoleHandler();
-        handler.setLevel(Level.ALL);
-        LOGGER.addHandler(handler);
 
         try {
             final String PATHSEPARATOR = "/";
@@ -43,7 +42,7 @@ public class SftpDownloader {
             jschSession.disconnect();
             channelSftp.exit();
         } catch (JSchException | SftpException e) {
-            LOGGER.log(Level.ALL, e.getMessage(), e);
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
     }
 }

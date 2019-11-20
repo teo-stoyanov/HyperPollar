@@ -1,8 +1,5 @@
 package orgprimeholding.service.configurations;
 
-import com.sun.corba.se.spi.orbutil.fsm.Input;
-
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;

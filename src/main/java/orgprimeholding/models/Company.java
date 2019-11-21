@@ -1,6 +1,12 @@
-package org.primeholding.models;
+package orgprimeholding.models;
 
-import javax.xml.bind.annotation.*;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @XmlRootElement(name = "company")
@@ -21,6 +27,7 @@ public class Company {
     private List<Store> stores;
 
     public Company() {
+        /* JAXB need an non-arg constructor for unmarshalling */
     }
 
     public String getName() {

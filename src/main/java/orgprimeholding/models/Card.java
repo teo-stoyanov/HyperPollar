@@ -1,7 +1,10 @@
-package org.primeholding.models;
+package orgprimeholding.models;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Card {
     @XmlElement (name = "cardtype")
     private String cardType;
@@ -13,6 +16,7 @@ public class Card {
     private boolean contactless;
 
     public Card() {
+        /* JAXB need an non-arg constructor for unmarshalling */
     }
 
     public String getCardType() {

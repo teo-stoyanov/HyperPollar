@@ -1,6 +1,6 @@
-package org.primeholding.models;
+package orgprimeholding.models;
 
-import org.primeholding.service.DateAdapter;
+import orgprimeholding.service.parsers.DateAdapter;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -24,6 +24,7 @@ public class Receipt {
     private Card card;
 
     public Receipt() {
+        /* JAXB need an non-arg constructor for unmarshalling */
     }
 
     public double getTotalPrice() {

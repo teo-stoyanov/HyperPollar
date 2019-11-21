@@ -1,6 +1,11 @@
-package org.primeholding.models;
+package orgprimeholding.models;
 
-import javax.xml.bind.annotation.*;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -12,7 +17,7 @@ public class Store {
     private String address;
 
     @XmlElementWrapper(name="receipts")
-    @XmlElement (name = "receipt")
+    @XmlElement(name = "receipt")
     private List<Receipt> receipts;
 
     @XmlElementWrapper(name="invoices")
@@ -20,6 +25,7 @@ public class Store {
     private List<Invoice> invoices;
 
     public Store() {
+        /* JAXB need an non-arg constructor for unmarshalling */
     }
 
     public Store(String name, String address) {

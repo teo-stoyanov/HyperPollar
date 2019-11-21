@@ -1,14 +1,20 @@
-package org.primeholding.service;
+package orgprimeholding.service.parsers;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class XmlParser {
+    private static final Logger LOGGER = Logger.getLogger(XmlParser.class.getName());
 
-    public static <T> T Parse(File file, Class<T> clazz) {
+    private XmlParser() {
+    }
+
+    public static <T> T parse(File file, Class<T> clazz) {
 
         JAXBContext jaxbContext;
 
@@ -18,7 +24,7 @@ public class XmlParser {
             return (T) jaxbUnmarshaller.unmarshal(file);
 
         } catch (JAXBException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE,e.getMessage(),e);
         }
 
         return null;

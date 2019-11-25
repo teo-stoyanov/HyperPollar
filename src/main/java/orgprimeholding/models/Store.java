@@ -33,6 +33,22 @@ public class Store {
         this.address = address;
     }
 
+    public List<Receipt> getReceipts() {
+        return this.receipts;
+    }
+
+    public void setReceipts(List<Receipt> receipts) {
+        this.receipts = receipts;
+    }
+
+    public List<Invoice> getInvoices() {
+        return this.invoices;
+    }
+
+    public void setInvoices(List<Invoice> invoices) {
+        this.invoices = invoices;
+    }
+
     public String getName() {
         return this.name;
     }

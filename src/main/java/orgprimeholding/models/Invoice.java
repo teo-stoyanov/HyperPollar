@@ -11,28 +11,31 @@ import java.time.LocalDateTime;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Invoice {
     @XmlElement(name = "total")
-    private double totalPrice;
+    private double total;
 
     @XmlElement(name = "datetime",required = true)
     @XmlJavaTypeAdapter(DateAdapter.class)
     private LocalDateTime dateTime;
 
     @XmlElement(name = "payment")
-    private String paymentType;
+    private String payment;
 
     @XmlElement(name = "customer")
     private Customer customer;
+
+    @XmlElement (name = "carddetails")
+    private Card card;
 
     public Invoice() {
         /* JAXB need an non-arg constructor for unmarshalling */
     }
 
-    public double getTotalPrice() {
-        return this.totalPrice;
+    public double getTotal() {
+        return this.total;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public LocalDateTime getDateTime() {
@@ -43,12 +46,12 @@ public class Invoice {
         this.dateTime = dateTime;
     }
 
-    public String getPaymentType() {
-        return this.paymentType;
+    public String getPayment() {
+        return this.payment;
     }
 
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType;
+    public void setPayment(String payment) {
+        this.payment = payment;
     }
 
     public Customer getCustomer() {
@@ -57,5 +60,13 @@ public class Invoice {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public Card getCard() {
+        return this.card;
+    }
+
+    public void setCard(Card card) {
+        this.card = card;
     }
 }

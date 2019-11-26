@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 public class EntitiesToDb {
     private static final Logger LOGGER = Logger.getLogger(EntitiesToDb.class.getName());
     private static final String LOG_MSG = " stored in DB.";
+    private static final String SPACE = " ";
 
     private static final String COMPANY = "company";
     private static final String STORE = "store";
@@ -43,13 +44,13 @@ public class EntitiesToDb {
                 createCompany(company, connection);
             }
             int companyId = returnIdByUuid(COMPANY, company.getUuid(), connection, COMPANY_ID);
-            LOGGER.log(Level.INFO, company.getName() + LOG_MSG);
+            LOGGER.log(Level.INFO, company.getName() + SPACE + COMPANY + LOG_MSG);
             for (StoreEntity store : company.getStores()) {
                 if (!checkIfExistWithNameAndAddress(STORE, store.getName(), store.getAddress(), connection)) {
                     createStore(store, connection, companyId);
                 }
                 int storeId = returnIdByNameAndAddress(STORE, store.getName(), store.getAddress(), connection, STORE_ID);
-                LOGGER.log(Level.INFO, store.getName() + LOG_MSG);
+                LOGGER.log(Level.INFO, store.getName() + SPACE + STORE + LOG_MSG);
                 for (ReceiptEntity receipt : store.getReceipts()) {
                     int receiptId = createReceiptAndReturnId(receipt, connection, storeId);
                     if (receipt.getCard() != null) {
@@ -67,7 +68,7 @@ public class EntitiesToDb {
                     if (invoice.getCustomer() != null) {
                         if (!checkIfExistWithUuid(CUSTOMER, invoice.getCustomer().getUuid(), connection)) {
                             createCustomer(invoice.getCustomer(), connection);
-                            LOGGER.log(Level.INFO, invoice.getCustomer().getName() + LOG_MSG);
+                            LOGGER.log(Level.INFO, invoice.getCustomer().getName() + SPACE + CUSTOMER + LOG_MSG);
                         }
                         int customerId = returnIdByUuid(CUSTOMER, invoice.getCustomer().getUuid(), connection, CUSTOMER_ID);
                         updateInvoiceWithCustomer(invoice, connection, customerId, invoiceId);
@@ -82,7 +83,7 @@ public class EntitiesToDb {
         int cardId;
         if (!checkIfExistWithCardNumber(CARD, card.getNumber(), connection)) {
             cardId = createCardAndReturnId(card, connection);
-            LOGGER.log(Level.INFO, card.getClass().getName() + LOG_MSG);
+            LOGGER.log(Level.INFO, card.getClass().getName() + SPACE + CARD + LOG_MSG);
         } else {
             cardId = returnIdByNumber(CARD, card.getNumber(), connection, CARD_ID);
         }

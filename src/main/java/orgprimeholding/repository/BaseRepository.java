@@ -25,7 +25,6 @@ public abstract class BaseRepository<T> {
 
     String insertQuery() {
         StringBuilder queryBuilder = new StringBuilder();
-        //ID might not be needed
         queryBuilder.append("INSERT INTO ").append(toSnakeCase(this.entity.getSimpleName()).replace(REPLACE, REPLACEMENT)).append(" (");
         String[] fieldsName = Arrays.stream(this.entity.getDeclaredFields())
                 .filter(f ->f.isAnnotationPresent(Column.class) && !f.getName().equalsIgnoreCase("id"))

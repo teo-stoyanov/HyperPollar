@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class InvoiceRepository extends BaseRepository {
+public class InvoiceRepository extends BaseRepository implements Repository<InvoiceEntity>{
     private static final Logger LOGGER = Logger.getLogger(InvoiceRepository.class.getName());
 
     public InvoiceRepository(Class entity, Connection connection) {

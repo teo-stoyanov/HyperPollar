@@ -9,7 +9,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CustomerRepository extends BaseRepository  {
+public class CustomerRepository extends BaseRepository  implements Repository<CustomerEntity>{
     private static final Logger LOGGER = Logger.getLogger(CustomerRepository.class.getName());
 
     public CustomerRepository(Class entity, Connection connection) {

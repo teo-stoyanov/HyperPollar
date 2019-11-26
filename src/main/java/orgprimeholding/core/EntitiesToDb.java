@@ -119,7 +119,8 @@ public class EntitiesToDb {
 
     private static void createStore(StoreEntity store, Connection connection, Integer companyId) {
         StoreRepository storeRepository = new StoreRepository(store.getClass(), connection);
-        int storeId = storeRepository.insert(store);
+        storeRepository.insert(store);
+        int storeId = storeRepository.getId();
         storeRepository.setCompanyId(companyId, storeId);
     }
 
@@ -130,19 +131,22 @@ public class EntitiesToDb {
 
     private static int createCardAndReturnId(CardDetailsEntity card, Connection connection) {
         CardRepository cardRepository = new CardRepository(card.getClass(), connection);
-        return cardRepository.insert(card);
+        cardRepository.insert(card);
+        return cardRepository.getId();
     }
 
     private static int createReceiptAndReturnId(ReceiptEntity receipt, Connection connection, Integer storeId) {
         ReceiptRepository receiptRepository = new ReceiptRepository(receipt.getClass(), connection);
-        int receiptId = receiptRepository.insert(receipt);
+        receiptRepository.insert(receipt);
+        int receiptId = receiptRepository.getId();
         receiptRepository.setStoreId(storeId, receiptId);
         return receiptId;
     }
 
     private static int createInvoiceAndReturnId(InvoiceEntity invoice, Connection connection, Integer storeId) {
         InvoiceRepository invoiceRepository = new InvoiceRepository(invoice.getClass(), connection);
-        int invoiceId = invoiceRepository.insert(invoice);
+        invoiceRepository.insert(invoice);
+        int invoiceId = invoiceRepository.getId();
         invoiceRepository.setStoreId(storeId, invoiceId);
         return invoiceId;
     }

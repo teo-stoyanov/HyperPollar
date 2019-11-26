@@ -45,15 +45,15 @@ public abstract class BaseRepository<T> {
         return key.replaceAll("(.)(\\p{Upper})", "$1_$2").toLowerCase();
     }
 
-    static Integer getId(PreparedStatement insertQuery) {
+    static int getId(PreparedStatement insertQuery) {
         try (ResultSet rs = insertQuery.getGeneratedKeys()) {
             if (rs.next()) {
-                return (int) rs.getLong(1);
+                return rs.getInt(1);
             }
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
-        return null;
+        return 0;
     }
 
     public Class<T> getEntity() {

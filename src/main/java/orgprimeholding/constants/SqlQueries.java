@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class SqlQueries {
-    private static List<String> allQueries = new ArrayList<>();
+    private static final List<String> ALL_QUERIES = new ArrayList<>();
 
     private SqlQueries() {
     }
 
-    private static String createCompanyTable = "CREATE TABLE IF NOT EXISTS `company` (\n" +
+    private static final String CREATE_COMPANY_TABLE = "CREATE TABLE IF NOT EXISTS `company` (\n" +
             "  `company_id` int(11) NOT NULL AUTO_INCREMENT,\n" +
             "  `name` varchar(100) DEFAULT NULL,\n" +
             "  `address` varchar(200) DEFAULT NULL,\n" +
@@ -17,14 +17,14 @@ public final class SqlQueries {
             "  PRIMARY KEY (`company_id`)\n" +
             ") ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
 
-    private static String createCardDetailsTable = "CREATcreateCompanyTable" +
+    private static final String CREATE_CARD_DETAILS_TABLE = "CREATE TABLE IF NOT EXISTS `card_details` (\n" +
             "  `cardtype` varchar(50) DEFAULT NULL,\n" +
             "  `number` varchar(250) DEFAULT NULL,\n" +
             "  `contactless` tinyint(1) DEFAULT NULL,\n" +
             "  PRIMARY KEY (`card_id`)\n" +
             ") ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
 
-    private static String createCustomerTable = "CREATE TABLE IF NOT EXISTS `customer` (\n" +
+    private static final String CREATE_CUSTOMER_TABLE = "CREATE TABLE IF NOT EXISTS `customer` (\n" +
             "  `customer_id` int(11) NOT NULL AUTO_INCREMENT,\n" +
             "  `name` varchar(50) DEFAULT NULL,\n" +
             "  `address` varchar(200) DEFAULT NULL,\n" +
@@ -32,7 +32,7 @@ public final class SqlQueries {
             "  PRIMARY KEY (`customer_id`)\n" +
             ") ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
 
-    private static String createInvoiceTable = "CREATE TABLE IF NOT EXISTS `invoice` (\n" +
+    private static final String CREATE_INVOICE_TABLE = "CREATE TABLE IF NOT EXISTS `invoice` (\n" +
             "  `invoice_id` int(11) NOT NULL AUTO_INCREMENT,\n" +
             "  `total` decimal(10,2) DEFAULT NULL,\n" +
             "  `datetime` datetime DEFAULT NULL,\n" +
@@ -49,7 +49,7 @@ public final class SqlQueries {
             "  CONSTRAINT `fk_invoice_store` FOREIGN KEY (`store_id`) REFERENCES `store` (`store_id`)\n" +
             ") ENGINE=InnoDB AUTO_INCREMENT=3675 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
 
-    private static String createTableReceipt = "CREATE TABLE IF NOT EXISTS `receipt` (\n" +
+    private static final String CREATE_TABLE_RECEIPT = "CREATE TABLE IF NOT EXISTS `receipt` (\n" +
             "  `receipt_id` int(11) NOT NULL AUTO_INCREMENT,\n" +
             "  `total` decimal(10,2) DEFAULT NULL,\n" +
             "  `datetime` datetime DEFAULT NULL,\n" +
@@ -63,7 +63,7 @@ public final class SqlQueries {
             "  CONSTRAINT `fk_receipt_card` FOREIGN KEY (`card_id`) REFERENCES `card_details` (`card_id`)\n" +
             ") ENGINE=InnoDB AUTO_INCREMENT=6233 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
 
-    private static String createTableStore = "CREATE TABLE IF NOT EXISTS `store` (\n" +
+    private static final String CREATE_TABLE_STORE = "CREATE TABLE IF NOT EXISTS `store` (\n" +
             "  `store_id` int(11) NOT NULL AUTO_INCREMENT,\n" +
             "  `name` varchar(50) DEFAULT NULL,\n" +
             "  `address` varchar(200) DEFAULT NULL,\n" +
@@ -74,16 +74,16 @@ public final class SqlQueries {
             ") ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
 
     private static void updateList(){
-        allQueries.add(createCompanyTable);
-        allQueries.add(createCardDetailsTable);
-        allQueries.add(createCustomerTable);
-        allQueries.add(createTableStore);
-        allQueries.add(createInvoiceTable);
-        allQueries.add(createTableReceipt);
+        ALL_QUERIES.add(CREATE_COMPANY_TABLE);
+        ALL_QUERIES.add(CREATE_CARD_DETAILS_TABLE);
+        ALL_QUERIES.add(CREATE_CUSTOMER_TABLE);
+        ALL_QUERIES.add(CREATE_TABLE_STORE);
+        ALL_QUERIES.add(CREATE_INVOICE_TABLE);
+        ALL_QUERIES.add(CREATE_TABLE_RECEIPT);
     }
 
     public static List<String> getAllQueries(){
         updateList();
-        return allQueries;
+        return ALL_QUERIES;
     }
 }

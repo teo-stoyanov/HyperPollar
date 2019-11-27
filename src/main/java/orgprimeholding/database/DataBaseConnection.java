@@ -11,11 +11,12 @@ public class DataBaseConnection {
 
     private static Connection connection;
 
-    public static void createConnection(String dbName,Properties properties) throws SQLException {
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + dbName,properties);
-    }
-
-    public static Connection getConnection() {
+    public static Connection getInstance(String dbName, Properties properties) throws SQLException {
+        if(connection == null){
+            connection = DriverManager.getConnection("jdbc:" + properties.getProperty("database.driver") +
+                    "://" + properties.getProperty("database.server") + "/" + dbName, properties.getProperty("db.user")
+                    ,properties.getProperty("db.password"));
+        }
         return connection;
     }
 }

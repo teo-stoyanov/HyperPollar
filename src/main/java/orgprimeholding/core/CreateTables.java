@@ -6,8 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class CreateDb {
-    private CreateDb() {
+public class CreateTables {
+    private CreateTables() {
     }
 
     public static void createMyDb(Connection connection) throws SQLException {

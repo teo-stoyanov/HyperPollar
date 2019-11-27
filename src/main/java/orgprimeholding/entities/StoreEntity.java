@@ -20,6 +20,8 @@ public class StoreEntity{
 
     private List<InvoiceEntity> invoices;
 
+    private Integer companyId;
+
     public StoreEntity() {
         /* We need empty constructor, because some fields might be null*/
     }
@@ -62,5 +64,13 @@ public class StoreEntity{
 
     public void setInvoices(List<InvoiceEntity> invoices) {
         this.invoices = invoices;
+    }
+
+    public Integer getCompanyId() {
+        return this.companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 }

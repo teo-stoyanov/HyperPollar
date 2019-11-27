@@ -26,14 +26,14 @@ public class ModelCreator {
 
     public void downloadAndCreate(Properties properties){
 
-        String userName = properties.getProperty("userName");
+        String userName = properties.getProperty("sftp.user");
         String remoteHost = properties.getProperty("remoteHost");
-        String password = properties.getProperty("passwordForServer");
+        String password = properties.getProperty("sftp.password");
         String remoteDir = properties.getProperty("remoteDir");
         String localDir = properties.getProperty("localDir");
         String schemaPath = properties.getProperty("schemaPath");
 
-        SftpDownloader.downloadFiles(userName, remoteHost, password, remoteDir, localDir);
+        //SftpDownloader.downloadFiles(userName, remoteHost, password, remoteDir, localDir);
 
         File dir = new File(localDir);
         File[] directoryListing = dir.listFiles();

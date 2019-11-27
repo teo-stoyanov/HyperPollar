@@ -1,10 +1,14 @@
 package orgprimeholding.entities;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table
 public class CardDetailsEntity {
+    @Id
+    private int id;
+
     @Column(name = "cardtype")
     private String cardType;
 
@@ -40,5 +44,13 @@ public class CardDetailsEntity {
 
     public void setContactless(boolean contactless) {
         this.contactless = contactless;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

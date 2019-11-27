@@ -6,7 +6,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Table
-public class StoreEntity{
+public class StoreEntity {
     @Id
     private int id;
 

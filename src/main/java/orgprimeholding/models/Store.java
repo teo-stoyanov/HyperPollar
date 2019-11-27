@@ -16,12 +16,12 @@ public class Store {
     @XmlAttribute
     private String address;
 
-    @XmlElementWrapper(name="receipts")
+    @XmlElementWrapper(name = "receipts")
     @XmlElement(name = "receipt")
     private List<Receipt> receipts;
 
-    @XmlElementWrapper(name="invoices")
-    @XmlElement (name = "invoice")
+    @XmlElementWrapper(name = "invoices")
+    @XmlElement(name = "invoice")
     private List<Invoice> invoices;
 
     public Store() {

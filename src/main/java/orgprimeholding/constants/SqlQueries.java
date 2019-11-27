@@ -73,7 +73,7 @@ public final class SqlQueries {
             "  CONSTRAINT `fk_store_company` FOREIGN KEY (`company_id`) REFERENCES `company` (`company_id`)\n" +
             ") ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
 
-    private static void updateList(){
+    private static void updateList() {
         ALL_QUERIES.add(CREATE_COMPANY_TABLE);
         ALL_QUERIES.add(CREATE_CARD_DETAILS_TABLE);
         ALL_QUERIES.add(CREATE_CUSTOMER_TABLE);
@@ -82,7 +82,7 @@ public final class SqlQueries {
         ALL_QUERIES.add(CREATE_TABLE_RECEIPT);
     }
 
-    public static List<String> getAllQueries(){
+    public static List<String> getAllQueries() {
         updateList();
         return ALL_QUERIES;
     }

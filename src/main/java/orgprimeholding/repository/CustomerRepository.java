@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CustomerRepository extends BaseRepository  implements Repository<CustomerEntity>{
+public class CustomerRepository extends BaseRepository implements Repository<CustomerEntity> {
     private static final Logger LOGGER = Logger.getLogger(CustomerRepository.class.getName());
 
     public CustomerRepository(Class entity, Connection connection) {
@@ -37,19 +37,19 @@ public class CustomerRepository extends BaseRepository  implements Repository<Cu
     public CustomerEntity get(int id) {
         String getQuery = "SELECT * FROM customer WHERE customer_id = " + id;
         CustomerEntity customerEntity = new CustomerEntity();
-        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement(getQuery)){
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement(getQuery);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
                 customerEntity.setId(resultSet.getInt("customer_id"));
                 customerEntity.setName(resultSet.getString("name"));
                 customerEntity.setAddress(resultSet.getString("address"));
                 customerEntity.setUuid(resultSet.getString("uuid"));
-                resultSet.close();
                 break;
             }
             return customerEntity;
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE,e.getMessage(),e);
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
         return null;
     }

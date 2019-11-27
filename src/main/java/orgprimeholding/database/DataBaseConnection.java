@@ -12,10 +12,10 @@ public class DataBaseConnection {
     private static Connection connection;
 
     public static Connection getInstance(String dbName, Properties properties) throws SQLException {
-        if(connection == null){
+        if (connection == null) {
             connection = DriverManager.getConnection("jdbc:" + properties.getProperty("database.driver") +
-                    "://" + properties.getProperty("database.server") + "/" + dbName, properties.getProperty("db.user")
-                    ,properties.getProperty("db.password"));
+                            "://" + properties.getProperty("database.server") + "/" + dbName, properties.getProperty("db.user")
+                    , properties.getProperty("db.password"));
         }
         return connection;
     }

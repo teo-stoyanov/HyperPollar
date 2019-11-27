@@ -24,7 +24,7 @@ public class ModelCreator {
         companies = new ArrayList<>();
     }
 
-    public void downloadAndCreate(Properties properties){
+    public void downloadAndCreate(Properties properties) {
 
         String userName = properties.getProperty("sftp.user");
         String remoteHost = properties.getProperty("remoteHost");
@@ -33,11 +33,11 @@ public class ModelCreator {
         String localDir = properties.getProperty("localDir");
         String schemaPath = properties.getProperty("schemaPath");
 
-        //SftpDownloader.downloadFiles(userName, remoteHost, password, remoteDir, localDir);
+        SftpDownloader.downloadFiles(userName, remoteHost, password, remoteDir, localDir);
 
         File dir = new File(localDir);
         File[] directoryListing = dir.listFiles();
-        if(directoryListing == null){
+        if (directoryListing == null) {
             throw new NullPointerException();
         }
 

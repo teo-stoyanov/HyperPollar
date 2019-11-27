@@ -13,7 +13,7 @@ public class Invoice {
     @XmlElement(name = "total")
     private double total;
 
-    @XmlElement(name = "datetime",required = true)
+    @XmlElement(name = "datetime", required = true)
     @XmlJavaTypeAdapter(DateAdapter.class)
     private LocalDateTime dateTime;
 
@@ -23,7 +23,7 @@ public class Invoice {
     @XmlElement(name = "customer")
     private Customer customer;
 
-    @XmlElement (name = "carddetails")
+    @XmlElement(name = "carddetails")
     private Card card;
 
     public Invoice() {

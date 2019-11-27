@@ -24,7 +24,7 @@ public class XmlParser {
             return (T) jaxbUnmarshaller.unmarshal(file);
 
         } catch (JAXBException e) {
-            LOGGER.log(Level.SEVERE,e.getMessage(),e);
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
 
         return null;

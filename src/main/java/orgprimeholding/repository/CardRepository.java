@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CardRepository extends BaseRepository implements Repository<CardDetailsEntity>{
+public class CardRepository extends BaseRepository implements Repository<CardDetailsEntity> {
     private static final Logger LOGGER = Logger.getLogger(CardRepository.class.getName());
 
     public CardRepository(Class entity, Connection connection) {
@@ -37,19 +37,19 @@ public class CardRepository extends BaseRepository implements Repository<CardDet
     public CardDetailsEntity get(int id) {
         String getQuery = "SELECT * FROM card_details WHERE card_id = " + id;
         CardDetailsEntity cardDetailsEntity = new CardDetailsEntity();
-        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement(getQuery)){
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement(getQuery);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
                 cardDetailsEntity.setId(resultSet.getInt("card_id"));
                 cardDetailsEntity.setCardType(resultSet.getString("cardtype"));
                 cardDetailsEntity.setNumber(resultSet.getString("number"));
                 cardDetailsEntity.setContactless(resultSet.getBoolean("contactless"));
-                resultSet.close();
                 break;
             }
             return cardDetailsEntity;
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE,e.getMessage(),e);
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
         return null;
     }

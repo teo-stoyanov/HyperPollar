@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CompanyRepository extends BaseRepository implements Repository<CompanyEntity>{
+public class CompanyRepository extends BaseRepository implements Repository<CompanyEntity> {
     private static final Logger LOGGER = Logger.getLogger(CompanyRepository.class.getName());
 
     public CompanyRepository(Class entity, Connection connection) {
@@ -38,19 +38,19 @@ public class CompanyRepository extends BaseRepository implements Repository<Comp
     public CompanyEntity get(int id) {
         String getQuery = "SELECT * FROM company WHERE company_id = " + id;
         CompanyEntity companyEntity = new CompanyEntity();
-        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement(getQuery)){
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement(getQuery);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
                 companyEntity.setId(resultSet.getInt("company_id"));
                 companyEntity.setName(resultSet.getString("name"));
                 companyEntity.setAddress(resultSet.getString("address"));
                 companyEntity.setUuid(resultSet.getString("uuid"));
-                resultSet.close();
                 break;
             }
             return companyEntity;
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE,e.getMessage(),e);
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
         return null;
     }

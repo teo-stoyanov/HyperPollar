@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Card {
-    @XmlElement (name = "cardtype")
+    @XmlElement(name = "cardtype")
     private String cardType;
 
     @XmlElement(name = "number")

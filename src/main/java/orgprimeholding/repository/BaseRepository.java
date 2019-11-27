@@ -27,21 +27,21 @@ public abstract class BaseRepository<T> {
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("INSERT INTO ").append(toSnakeCase(this.entity.getSimpleName()).replace(REPLACE, REPLACEMENT)).append(" (");
         String[] fieldsName = Arrays.stream(this.entity.getDeclaredFields())
-                .filter(f ->f.isAnnotationPresent(Column.class) && !f.getName().equalsIgnoreCase("id"))
+                .filter(f -> f.isAnnotationPresent(Column.class) && !f.getName().equalsIgnoreCase("id"))
                 .map(Field::getName)
                 .toArray(String[]::new);
 
-        queryBuilder.append(String.join(",",fieldsName)).append(") VALUES (?");
+        queryBuilder.append(String.join(",", fieldsName)).append(") VALUES (?");
 
         for (int i = 1; i < fieldsName.length; i++) {
-           queryBuilder.append(",?");
+            queryBuilder.append(",?");
         }
         queryBuilder.append(");");
 
         return queryBuilder.toString();
     }
 
-    static String toSnakeCase(String key){
+    static String toSnakeCase(String key) {
         return key.replaceAll("(.)(\\p{Upper})", "$1_$2").toLowerCase();
     }
 

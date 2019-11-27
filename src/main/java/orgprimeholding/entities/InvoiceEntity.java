@@ -10,10 +10,10 @@ public class InvoiceEntity {
     @Id
     private int id;
 
-    @Column (name = "total")
+    @Column(name = "total")
     private double total;
 
-    @Column (name = "datetime")
+    @Column(name = "datetime")
     private LocalDateTime dateTime;
 
     @Column(name = "payment")

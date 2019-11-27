@@ -10,17 +10,17 @@ import java.time.LocalDateTime;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Receipt {
-    @XmlElement (name = "total")
+    @XmlElement(name = "total")
     private double total;
 
-    @XmlElement (name="datetime",required = true)
+    @XmlElement(name = "datetime", required = true)
     @XmlJavaTypeAdapter(DateAdapter.class)
     private LocalDateTime dateTime;
 
-    @XmlElement (name = "payment")
+    @XmlElement(name = "payment")
     private String payment;
 
-    @XmlElement (name = "carddetails")
+    @XmlElement(name = "carddetails")
     private Card card;
 
     public Receipt() {

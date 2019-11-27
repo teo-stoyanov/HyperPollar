@@ -6,13 +6,13 @@ import javax.xml.bind.annotation.XmlElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Customer {
-    @XmlElement (name = "name")
+    @XmlElement(name = "name")
     private String name;
 
     @XmlElement(name = "address")
     private String address;
 
-    @XmlElement (name = "uuid")
+    @XmlElement(name = "uuid")
     private String uuid;
 
     public Customer() {

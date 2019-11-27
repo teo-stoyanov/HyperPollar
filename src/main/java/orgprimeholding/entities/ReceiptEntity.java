@@ -11,10 +11,10 @@ public class ReceiptEntity {
     @Column(name = "total")
     private double total;
 
-    @Column (name="datetime")
+    @Column(name = "datetime")
     private LocalDateTime dateTime;
 
-    @Column (name = "payment")
+    @Column(name = "payment")
     private String payment;
 
     private CardDetailsEntity card;

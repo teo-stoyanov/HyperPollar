@@ -1,22 +1,33 @@
-package orgprimeholding.models;
+package orgprimeholding.entities;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@XmlAccessorType(XmlAccessType.FIELD)
-public class Customer {
-    @XmlElement(name = "name")
+@Table
+public class CustomerEntity {
+    @Id
+    private Integer id;
+
+    @Column
     private String name;
 
-    @XmlElement(name = "address")
+    @Column
     private String address;
 
-    @XmlElement(name = "uuid")
-    private String uuid;
+    @Column
+    String uuid;
 
-    public Customer() {
-        /* JAXB need an non-arg constructor for unmarshalling */
+    public CustomerEntity() {
+        /* We need empty constructor, because some fields might be null*/
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {

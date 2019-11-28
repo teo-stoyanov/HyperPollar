@@ -22,8 +22,8 @@ public class Company {
     @XmlAttribute
     private String uuid;
 
-    @XmlElementWrapper(name="stores")
-    @XmlElement(name="store")
+    @XmlElementWrapper(name = "stores")
+    @XmlElement(name = "store")
     private List<Store> stores;
 
     public Company() {

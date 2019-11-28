@@ -1,22 +1,25 @@
-package orgprimeholding.models;
+package orgprimeholding.entities;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@XmlAccessorType(XmlAccessType.FIELD)
-public class Card {
-    @XmlElement(name = "cardtype")
+@Table
+public class CardDetailsEntity {
+    @Id
+    private int id;
+
+    @Column(name = "cardtype")
     private String cardType;
 
-    @XmlElement(name = "number")
+    @Column(name = "number")
     private String number;
 
-    @XmlElement(name = "contactless")
+    @Column(name = "contactless")
     private boolean contactless;
 
-    public Card() {
-        /* JAXB need an non-arg constructor for unmarshalling */
+    public CardDetailsEntity() {
+        /* We need empty constructor, because some fields might be null*/
     }
 
     public String getCardType() {
@@ -41,5 +44,13 @@ public class Card {
 
     public void setContactless(boolean contactless) {
         this.contactless = contactless;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

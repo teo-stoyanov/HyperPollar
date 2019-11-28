@@ -9,6 +9,8 @@ import java.util.List;
 public class EntitiesToDb {
     public static void insertCompaniesToDb(List<CompanyEntity> companyEntities, Connection connection) {
         CompanyService companyService = new CompanyService(connection);
-        companyService.insertToDb(companyEntities);
+        for (CompanyEntity companyEntity : companyEntities) {
+            companyService.insertToDb(companyEntity);
+        }
     }
 }

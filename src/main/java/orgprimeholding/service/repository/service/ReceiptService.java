@@ -4,28 +4,28 @@ import orgprimeholding.entities.ReceiptEntity;
 import orgprimeholding.repository.ReceiptRepository;
 
 import java.sql.Connection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ReceiptService {
-    private static final Logger LOGGER = Logger.getLogger(ReceiptService.class.getName());
-
     private Connection connection;
     private ReceiptRepository receiptRepository;
 
-    public ReceiptService(Connection connection) {
+    ReceiptService(Connection connection) {
         this.connection = connection;
         this.receiptRepository = new ReceiptRepository(ReceiptEntity.class, this.connection);
     }
 
-    public Integer insertToDb(ReceiptEntity receipt, Integer storeId) {
+    void insertToDb(ReceiptEntity receipt, Integer storeId) {
         int receiptId = this.receiptRepository.insert(receipt);
         this.receiptRepository.setStoreId(storeId, receiptId);
-        LOGGER.log(Level.INFO, "Receipt inserted.");
-        return receiptId;
+
+        if (receipt.getCard() != null) {
+            CardService cardService = new CardService(this.connection);
+            cardService.insertToDb(receipt.getCard());
+            this.updateReceiptWithCard(cardService.getCardId(), receiptId);
+        }
     }
 
-    public void updateReceiptWithCard(Integer cardId, Integer receiptId) {
+    private void updateReceiptWithCard(Integer cardId, Integer receiptId) {
         this.receiptRepository.setCardId(cardId, receiptId);
     }
 }

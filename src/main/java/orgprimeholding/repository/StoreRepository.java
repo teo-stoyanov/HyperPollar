@@ -12,25 +12,29 @@ import java.util.logging.Logger;
 
 public class StoreRepository extends BaseRepository implements Repository<StoreEntity> {
     private static final Logger LOGGER = Logger.getLogger(StoreRepository.class.getName());
+    private static final String LOG_MSG = " store is stored in DB.";
 
     public StoreRepository(Class entity, Connection connection) {
         super(entity, connection);
     }
 
-    public int insert(StoreEntity entity) {
-        try (PreparedStatement insertQuery = super.getConnection().prepareStatement(super.insertQuery(), Statement.RETURN_GENERATED_KEYS)) {
-            insertQuery.setString(1, entity.getName());
-            insertQuery.setString(2, entity.getAddress());
-            insertQuery.executeUpdate();
+    public Integer insert(StoreEntity entity) {
+        Integer id = null;
+        if (!isExisted(entity.getName(), entity.getAddress())) {
+            try (PreparedStatement insertQuery = super.getConnection().prepareStatement(super.insertQuery(), Statement.RETURN_GENERATED_KEYS)) {
+                insertQuery.setString(1, entity.getName());
+                insertQuery.setString(2, entity.getAddress());
+                insertQuery.executeUpdate();
+                LOGGER.log(Level.INFO, entity.getName() + LOG_MSG);
 
-            Integer id = getId(insertQuery);
-            if (id != null) return id;
-
-        } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+                id = getId(insertQuery);
+            } catch (SQLException e) {
+                LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            }
+        } else {
+            id = returnId(entity.getName(), entity.getAddress());
         }
-
-        return -1;
+        return id;
     }
 
     @Override
@@ -61,5 +65,37 @@ public class StoreRepository extends BaseRepository implements Repository<StoreE
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
+    }
+
+
+    private boolean isExisted(String name, String address) {
+        try {
+            ResultSet resultSet = getResultSet(name, address);
+            return resultSet.next();
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+        return false;
+    }
+
+    private ResultSet getResultSet(String name, String address) throws SQLException {
+        PreparedStatement preparedStatement = super.getConnection().prepareStatement
+                ("SELECT store_id FROM store" + " WHERE `name` = ? AND `address` = ?;");
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, address);
+        return preparedStatement.executeQuery();
+    }
+
+    private Integer returnId(String name, String address) {
+        Integer storeId = null;
+        try {
+            ResultSet resultSet = getResultSet(name, address);
+            while (resultSet.next()) {
+                storeId = resultSet.getInt("store_id");
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+        return storeId;
     }
 }

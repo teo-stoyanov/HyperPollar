@@ -20,22 +20,21 @@ public class InvoiceRepository extends BaseRepository implements Repository<Invo
         super(entity, connection);
     }
 
-    public int insert(InvoiceEntity entity) {
+    public Integer insert(InvoiceEntity entity) {
+        Integer id = null;
         try (PreparedStatement insertQuery = super.getConnection().prepareStatement(super.insertQuery(), Statement.RETURN_GENERATED_KEYS)) {
             insertQuery.setDouble(1, entity.getTotal());
-            /*This might cause some problems*/
             insertQuery.setString(2, entity.getDateTime().toString());
             insertQuery.setString(3, entity.getPayment());
             insertQuery.executeUpdate();
+            LOGGER.log(Level.INFO, "Invoice is inserted.");
 
-            Integer id = getId(insertQuery);
-            if (id != null) return id;
-
+            id = getId(insertQuery);
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
 
-        return -1;
+        return id;
     }
 
 

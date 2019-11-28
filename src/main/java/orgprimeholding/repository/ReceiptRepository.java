@@ -19,22 +19,20 @@ public class ReceiptRepository extends BaseRepository implements Repository<Rece
         super(entity, connection);
     }
 
-    public int insert(ReceiptEntity entity) {
+    public Integer insert(ReceiptEntity entity) {
         try (PreparedStatement insertQuery = super.getConnection().prepareStatement(super.insertQuery(), Statement.RETURN_GENERATED_KEYS)) {
             insertQuery.setDouble(1, entity.getTotal());
-            /*This might cause some problems*/
             insertQuery.setString(2, entity.getDateTime().toString());
             insertQuery.setString(3, entity.getPayment());
             insertQuery.executeUpdate();
+            LOGGER.log(Level.INFO, "Receipt is inserted.");
 
-            Integer id = getId(insertQuery);
-            if (id != null) return id;
-
+           return getId(insertQuery);
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
 
-        return -1;
+        return null;
     }
 
     @Override

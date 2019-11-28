@@ -17,20 +17,24 @@ public class CardRepository extends BaseRepository implements Repository<CardDet
         super(entity, connection);
     }
 
-    public int insert(CardDetailsEntity entity) {
-        try (PreparedStatement insertQuery = super.getConnection().prepareStatement(super.insertQuery(), Statement.RETURN_GENERATED_KEYS)) {
-            insertQuery.setString(1, entity.getCardType());
-            insertQuery.setString(2, entity.getNumber());
-            insertQuery.setBoolean(3, entity.isContactless());
-            insertQuery.executeUpdate();
+    public Integer insert(CardDetailsEntity entity) {
+        Integer id = null;
+        if (!exist(entity.getNumber())) {
+            try (PreparedStatement insertQuery = super.getConnection().prepareStatement(super.insertQuery(), Statement.RETURN_GENERATED_KEYS)) {
+                insertQuery.setString(1, entity.getCardType());
+                insertQuery.setString(2, entity.getNumber());
+                insertQuery.setBoolean(3, entity.isContactless());
+                insertQuery.executeUpdate();
 
-            Integer id = getId(insertQuery);
-            if (id != null) return id;
-
-        } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+                id = getId(insertQuery);
+                LOGGER.log(Level.INFO, "Card inserted.");
+            } catch (SQLException e) {
+                LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            }
+        } else {
+            id = returnId(entity.getNumber());
         }
-        return -1;
+        return id;
     }
 
     @Override
@@ -54,5 +58,32 @@ public class CardRepository extends BaseRepository implements Repository<CardDet
         return null;
     }
 
+    private boolean exist(String number) {
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement
+                ("SELECT * FROM card_details" + " WHERE `number` = " + number);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            return resultSet.next();
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+        return false;
+    }
+
+    private Integer returnId(String number) {
+        Integer cardId = null;
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement
+                ("SELECT card_id FROM card_details" + " WHERE `number` = " + number);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                cardId = resultSet.getInt("card_id");
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return cardId;
+    }
 
 }

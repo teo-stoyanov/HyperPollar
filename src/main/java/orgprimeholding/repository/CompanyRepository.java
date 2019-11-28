@@ -12,26 +12,31 @@ import java.util.logging.Logger;
 
 public class CompanyRepository extends BaseRepository implements Repository<CompanyEntity> {
     private static final Logger LOGGER = Logger.getLogger(CompanyRepository.class.getName());
+    private static final String LOG_MSG = " company is stored in DB.";
 
     public CompanyRepository(Class entity, Connection connection) {
         super(entity, connection);
     }
 
-    public int insert(CompanyEntity entity) {
-        try (PreparedStatement insertQuery = super.getConnection().prepareStatement(super.insertQuery(), Statement.RETURN_GENERATED_KEYS)) {
-            insertQuery.setString(1, entity.getName());
-            insertQuery.setString(2, entity.getAddress());
-            insertQuery.setString(3, entity.getUuid());
-            insertQuery.executeUpdate();
+    public Integer insert(CompanyEntity entity) {
+        Integer id = null;
+        if (!exist(entity.getUuid())) {
+            try (PreparedStatement insertQuery = super.getConnection().prepareStatement(super.insertQuery(), Statement.RETURN_GENERATED_KEYS)) {
+                insertQuery.setString(1, entity.getName());
+                insertQuery.setString(2, entity.getAddress());
+                insertQuery.setString(3, entity.getUuid());
+                insertQuery.executeUpdate();
+                LOGGER.log(Level.INFO, entity.getName() + LOG_MSG);
 
-            Integer id = getId(insertQuery);
-            if (id != null) return id;
-
-        } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+                id = getId(insertQuery);
+            } catch (SQLException e) {
+                LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            }
+        } else {
+            id = returnId(entity.getUuid());
         }
 
-        return -1;
+        return id;
     }
 
     @Override
@@ -53,5 +58,32 @@ public class CompanyRepository extends BaseRepository implements Repository<Comp
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
         return null;
+    }
+
+    private boolean exist(String uuid) {
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement("SELECT * FROM company" + " WHERE `uuid` = " + uuid);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            return resultSet.next();
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return false;
+    }
+
+    private Integer returnId(String uuid) {
+        Integer companyId = null;
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement
+                ("SELECT company_id FROM company" + " WHERE `uuid` = " + uuid);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                companyId = resultSet.getInt("company_id");
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return companyId;
     }
 }

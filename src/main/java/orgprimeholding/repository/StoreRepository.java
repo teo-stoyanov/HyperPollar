@@ -71,6 +71,7 @@ public class StoreRepository extends BaseRepository implements Repository<StoreE
     private boolean isExisted(String name, String address) {
         try {
             ResultSet resultSet = getResultSet(name, address);
+            assert resultSet != null;
             return resultSet.next();
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
@@ -78,18 +79,21 @@ public class StoreRepository extends BaseRepository implements Repository<StoreE
         return false;
     }
 
-    private ResultSet getResultSet(String name, String address) throws SQLException {
-        PreparedStatement preparedStatement = super.getConnection().prepareStatement
-                ("SELECT store_id FROM store" + " WHERE `name` = ? AND `address` = ?;");
-        preparedStatement.setString(1, name);
-        preparedStatement.setString(2, address);
-        return preparedStatement.executeQuery();
+    private ResultSet getResultSet(String name, String address) {
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement
+                ("SELECT store_id FROM store" + " WHERE `name` = " + name + " AND `address` = " + address)) {
+            return preparedStatement.executeQuery();
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+        return null;
     }
 
     private Integer returnId(String name, String address) {
         Integer storeId = null;
         try {
             ResultSet resultSet = getResultSet(name, address);
+            assert resultSet != null;
             while (resultSet.next()) {
                 storeId = resultSet.getInt("store_id");
             }

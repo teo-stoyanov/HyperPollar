@@ -7,6 +7,9 @@ import java.sql.Connection;
 import java.util.List;
 
 public class EntitiesToDb {
+    private EntitiesToDb() {
+    }
+
     public static void insertCompaniesToDb(List<CompanyEntity> companyEntities, Connection connection) {
         CompanyService companyService = new CompanyService(connection);
         for (CompanyEntity companyEntity : companyEntities) {

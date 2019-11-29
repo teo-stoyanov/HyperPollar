@@ -33,7 +33,7 @@ public class ModelCreator {
         String localDir = properties.getProperty("localDir");
         String schemaPath = properties.getProperty("schemaPath");
 
-        //SftpDownloader.downloadFiles(userName, remoteHost, password, remoteDir, localDir);
+        SftpDownloader.downloadFiles(userName, remoteHost, password, remoteDir, localDir);
 
         File dir = new File(localDir);
         File[] directoryListing = dir.listFiles();

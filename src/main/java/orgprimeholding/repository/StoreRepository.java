@@ -67,33 +67,23 @@ public class StoreRepository extends BaseRepository implements Repository<StoreE
         }
     }
 
-
     private boolean isExisted(String name, String address) {
-        try {
-            ResultSet resultSet = getResultSet(name, address);
-            assert resultSet != null;
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement(
+                String.format("SELECT store_id FROM store WHERE `name` = \"%s\" AND `address` = \"%s\"", name, address));
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             return resultSet.next();
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
-        return false;
-    }
 
-    private ResultSet getResultSet(String name, String address) {
-        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement
-                ("SELECT store_id FROM store" + " WHERE `name` = " + name + " AND `address` = " + address)) {
-            return preparedStatement.executeQuery();
-        } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
-        }
-        return null;
+        return false;
     }
 
     private Integer returnId(String name, String address) {
         Integer storeId = null;
-        try {
-            ResultSet resultSet = getResultSet(name, address);
-            assert resultSet != null;
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement(
+                String.format("SELECT store_id FROM store WHERE `name` = \"%s\" AND `address` = \"%s\"", name, address));
+             ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 storeId = resultSet.getInt("store_id");
             }

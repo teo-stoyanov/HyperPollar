@@ -1,4 +1,4 @@
-package orgprimeholding.service.repository.service;
+package orgprimeholding.service;
 
 import orgprimeholding.entities.ReceiptEntity;
 import orgprimeholding.repository.ReceiptRepository;
@@ -27,5 +27,16 @@ public class ReceiptService {
 
     private void updateReceiptWithCard(Integer cardId, Integer receiptId) {
         this.receiptRepository.setCardId(cardId, receiptId);
+    }
+
+    ReceiptEntity getFromDb(Integer id){
+        ReceiptEntity receiptEntity = this.receiptRepository.get(id);
+        Integer cardId = this.receiptRepository.getCardIdWithReceiptId(receiptEntity.getId());
+        if(cardId != null){
+          CardService cardService = new CardService(this.connection);
+          receiptEntity.setCard(cardService.getFromDb(cardId));
+        }
+
+        return receiptEntity;
     }
 }

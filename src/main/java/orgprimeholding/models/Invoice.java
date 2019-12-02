@@ -1,6 +1,6 @@
 package orgprimeholding.models;
 
-import orgprimeholding.service.parsers.DateAdapter;
+import orgprimeholding.utils.parsers.DateAdapter;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

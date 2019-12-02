@@ -1,6 +1,6 @@
-package orgprimeholding.core;
+package orgprimeholding.utils;
 
-import orgprimeholding.constants.SqlQueries;
+import orgprimeholding.constants.SqlTableQueries;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +15,7 @@ public class InitializeDb {
     }
 
     public static void createTables(Connection connection) {
-        for (String query : SqlQueries.getAllQueries()) {
+        for (String query : SqlTableQueries.getAllQueries()) {
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.execute();
 

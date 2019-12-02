@@ -1,4 +1,4 @@
-package orgprimeholding.service.parsers;
+package orgprimeholding.utils.parsers;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -17,7 +17,6 @@ public class XmlParser {
     public static <T> T parse(File file, Class<T> clazz) {
 
         JAXBContext jaxbContext;
-
         try {
             jaxbContext = JAXBContext.newInstance(clazz);
             Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();

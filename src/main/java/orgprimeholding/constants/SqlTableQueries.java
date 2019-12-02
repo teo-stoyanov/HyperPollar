@@ -3,17 +3,16 @@ package orgprimeholding.constants;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class SqlQueries {
+public final class SqlTableQueries {
     private static final List<String> ALL_QUERIES = new ArrayList<>();
-    private static final String ADDRESS_DESCRIPTION = "`address` varchar(200) DEFAULT NULL,\n";
 
-    private SqlQueries() {
+    private SqlTableQueries() {
     }
 
     private static final String CREATE_COMPANY_TABLE = "CREATE TABLE IF NOT EXISTS `company` (\n" +
             "  `company_id` int(11) NOT NULL AUTO_INCREMENT,\n" +
             "  `name` varchar(100) DEFAULT NULL,\n" +
-            ADDRESS_DESCRIPTION +
+            "`address` varchar(200) DEFAULT NULL,\n" +
             "  `uuid` varchar(50) DEFAULT NULL,\n" +
             "  PRIMARY KEY (`company_id`)\n" +
             ") ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
@@ -28,7 +27,7 @@ public final class SqlQueries {
     private static final String CREATE_CUSTOMER_TABLE = "CREATE TABLE IF NOT EXISTS `customer` (\n" +
             "  `customer_id` int(11) NOT NULL AUTO_INCREMENT,\n" +
             "  `name` varchar(50) DEFAULT NULL,\n" +
-            ADDRESS_DESCRIPTION +
+            "`address` varchar(200) DEFAULT NULL,\n" +
             "  `uuid` varchar(50) DEFAULT NULL,\n" +
             "  PRIMARY KEY (`customer_id`)\n" +
             ") ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
@@ -67,7 +66,7 @@ public final class SqlQueries {
     private static final String CREATE_TABLE_STORE = "CREATE TABLE IF NOT EXISTS `store` (\n" +
             "  `store_id` int(11) NOT NULL AUTO_INCREMENT,\n" +
             "  `name` varchar(50) DEFAULT NULL,\n" +
-            ADDRESS_DESCRIPTION +
+            "`address` varchar(200) DEFAULT NULL, \n" +
             "  `company_id` int(11) DEFAULT NULL,\n" +
             "  PRIMARY KEY (`store_id`),\n" +
             "  KEY `fk_store_company` (`company_id`),\n" +

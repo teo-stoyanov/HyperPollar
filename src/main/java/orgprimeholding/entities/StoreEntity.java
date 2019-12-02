@@ -1,11 +1,11 @@
 package orgprimeholding.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import orgprimeholding.annotations.Column;
+import orgprimeholding.annotations.Id;
+
+import java.util.ArrayList;
 import java.util.List;
 
-@Table
 public class StoreEntity {
     @Id
     private int id;
@@ -20,9 +20,9 @@ public class StoreEntity {
 
     private List<InvoiceEntity> invoices;
 
-    private Integer companyId;
-
     public StoreEntity() {
+        this.receipts = new ArrayList<>();
+        this.invoices = new ArrayList<>();
         /* We need empty constructor, because some fields might be null*/
     }
 
@@ -64,13 +64,5 @@ public class StoreEntity {
 
     public void setInvoices(List<InvoiceEntity> invoices) {
         this.invoices = invoices;
-    }
-
-    public Integer getCompanyId() {
-        return this.companyId;
-    }
-
-    public void setCompanyId(Integer companyId) {
-        this.companyId = companyId;
     }
 }

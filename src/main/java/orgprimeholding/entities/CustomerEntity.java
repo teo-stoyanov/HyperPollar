@@ -1,10 +1,9 @@
 package orgprimeholding.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Table
+import orgprimeholding.annotations.Column;
+import orgprimeholding.annotations.Id;
+
 public class CustomerEntity {
     @Id
     private Integer id;

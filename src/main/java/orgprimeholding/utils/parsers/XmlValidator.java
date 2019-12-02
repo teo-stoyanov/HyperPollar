@@ -1,4 +1,4 @@
-package orgprimeholding.service.validators;
+package orgprimeholding.utils.parsers;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.stream.StreamSource;

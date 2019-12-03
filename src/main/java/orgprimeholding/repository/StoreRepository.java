@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,7 +50,6 @@ public class StoreRepository extends BaseRepository implements Repository<StoreE
                 storeEntity.setId(resultSet.getInt("store_id"));
                 storeEntity.setName(resultSet.getString("name"));
                 storeEntity.setAddress(resultSet.getString("address"));
-                storeEntity.setCompanyId(resultSet.getInt("company_id"));
                 break;
             }
             return storeEntity;
@@ -91,5 +92,35 @@ public class StoreRepository extends BaseRepository implements Repository<StoreE
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
         return storeId;
+    }
+
+    public List<Integer> getReceiptIds(int storeId){
+        List<Integer> receiptIds = new ArrayList<>();
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement
+                ("SELECT receipt_id FROM receipt WHERE `store_id` = " + storeId);
+             ResultSet resultSet = preparedStatement.executeQuery()){
+            while (resultSet.next()) {
+                receiptIds.add(resultSet.getInt("receipt_id"));
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return receiptIds;
+    }
+
+    public List<Integer> getInvoiceIds(int storeId){
+        List<Integer> invoiceIds = new ArrayList<>();
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement
+                ("SELECT invoice_id FROM invoice WHERE `store_id` = " + storeId);
+             ResultSet resultSet = preparedStatement.executeQuery()){
+            while (resultSet.next()) {
+                invoiceIds.add(resultSet.getInt("invoice_id"));
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return invoiceIds;
     }
 }

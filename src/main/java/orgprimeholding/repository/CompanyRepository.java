@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -61,7 +63,7 @@ public class CompanyRepository extends BaseRepository implements Repository<Comp
     }
 
     private boolean exist(String uuid) {
-        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement("SELECT * FROM company" + " WHERE `uuid` = " + uuid);
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement("SELECT * FROM company WHERE `uuid` = " + uuid);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             return resultSet.next();
         } catch (SQLException e) {
@@ -74,7 +76,7 @@ public class CompanyRepository extends BaseRepository implements Repository<Comp
     private Integer returnId(String uuid) {
         Integer companyId = null;
         try (PreparedStatement preparedStatement = super.getConnection().prepareStatement
-                ("SELECT company_id FROM company" + " WHERE `uuid` = " + uuid);
+                ("SELECT company_id FROM company WHERE `uuid` = " + uuid);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
@@ -85,5 +87,20 @@ public class CompanyRepository extends BaseRepository implements Repository<Comp
         }
 
         return companyId;
+    }
+
+    public List<Integer> getStoreIds(int companyId){
+        List<Integer> storeIds = new ArrayList<>();
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement
+                ("SELECT store_id FROM store WHERE `company_id` = " + companyId);
+             ResultSet resultSet = preparedStatement.executeQuery()){
+            while (resultSet.next()) {
+                storeIds.add(resultSet.getInt("store_id"));
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return storeIds;
     }
 }

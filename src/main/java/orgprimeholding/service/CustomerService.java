@@ -1,4 +1,4 @@
-package orgprimeholding.service.repository.service;
+package orgprimeholding.service;
 
 import orgprimeholding.entities.CustomerEntity;
 import orgprimeholding.repository.CustomerRepository;
@@ -17,6 +17,10 @@ public class CustomerService {
 
     void insertToDb(CustomerEntity customerEntity) {
         this.customerId = this.customerRepository.insert(customerEntity);
+    }
+
+    CustomerEntity getFromDb(Integer customerId){
+        return this.customerRepository.get(customerId);
     }
 
     Integer getCustomerId() {

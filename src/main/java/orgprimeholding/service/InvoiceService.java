@@ -1,4 +1,4 @@
-package orgprimeholding.service.repository.service;
+package orgprimeholding.service;
 
 import orgprimeholding.entities.InvoiceEntity;
 import orgprimeholding.repository.InvoiceRepository;
@@ -29,6 +29,23 @@ public class InvoiceService {
             customerService.insertToDb(invoiceEntity.getCustomer());
             this.updateInvoiceWithCustomer(customerService.getCustomerId(), invoiceId);
         }
+    }
+
+    InvoiceEntity getFromDb(Integer id){
+        InvoiceEntity invoiceEntity = this.invoiceRepository.get(id);
+        Integer cardId = this.invoiceRepository.getCardIdWithInvoiceId(invoiceEntity.getId());
+        if(cardId != null){
+            CardService cardService = new CardService(this.connection);
+            invoiceEntity.setCard(cardService.getFromDb(cardId));
+        }
+
+        Integer customerId = this.invoiceRepository.getCustomerIdWithInvoiceId(invoiceEntity.getId());
+        if(customerId != null){
+            CustomerService customerService = new CustomerService(this.connection);
+            invoiceEntity.setCustomer(customerService.getFromDb(customerId));
+        }
+
+        return invoiceEntity;
     }
 
     private void updateInvoiceWithCard(Integer cardId, Integer invoiceId) {

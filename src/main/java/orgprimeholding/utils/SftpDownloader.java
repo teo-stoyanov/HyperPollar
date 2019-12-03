@@ -1,4 +1,4 @@
-package orgprimeholding.service.downloaders;
+package orgprimeholding.utils;
 
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.JSch;

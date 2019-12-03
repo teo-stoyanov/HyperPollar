@@ -1,4 +1,4 @@
-package orgprimeholding.service.configurations;
+package orgprimeholding.utils;
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.properties.EncryptableProperties;
@@ -17,7 +17,6 @@ public class ConfigLoader {
     }
 
     public static Properties getProperties(InputStream configPath) {
-
         try {
             StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
             encryptor.setPassword(KEY);
@@ -27,7 +26,6 @@ public class ConfigLoader {
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
-
         return null;
     }
 }

@@ -1,9 +1,9 @@
 package orgprimeholding.core;
 
 import orgprimeholding.models.Company;
-import orgprimeholding.service.downloaders.SftpDownloader;
-import orgprimeholding.service.parsers.XmlParser;
-import orgprimeholding.service.validators.XmlValidator;
+import orgprimeholding.utils.SftpDownloader;
+import orgprimeholding.utils.parsers.XmlParser;
+import orgprimeholding.utils.parsers.XmlValidator;
 
 import java.io.File;
 import java.io.FileInputStream;

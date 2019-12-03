@@ -1,21 +1,20 @@
 package orgprimeholding.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Table
+import orgprimeholding.annotations.Column;
+import orgprimeholding.annotations.Id;
+
 public class CardDetailsEntity {
     @Id
     private int id;
 
-    @Column(name = "cardtype")
+    @Column
     private String cardType;
 
-    @Column(name = "number")
+    @Column
     private String number;
 
-    @Column(name = "contactless")
+    @Column
     private boolean contactless;
 
     public CardDetailsEntity() {

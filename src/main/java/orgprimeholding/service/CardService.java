@@ -1,4 +1,4 @@
-package orgprimeholding.service.repository.service;
+package orgprimeholding.service;
 
 import orgprimeholding.entities.CardDetailsEntity;
 import orgprimeholding.repository.CardRepository;
@@ -21,5 +21,9 @@ public class CardService {
 
     Integer getCardId() {
         return this.cardId;
+    }
+
+    CardDetailsEntity getFromDb(Integer id){
+        return this.cardRepository.get(id);
     }
 }

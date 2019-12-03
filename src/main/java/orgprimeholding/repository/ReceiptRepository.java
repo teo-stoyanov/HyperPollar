@@ -49,8 +49,6 @@ public class ReceiptRepository extends BaseRepository implements Repository<Rece
                 String dateTime = resultSet.getString("datetime");
                 receiptEntity.setDateTime(LocalDateTime.parse(dateTime, formatter));
                 receiptEntity.setPayment(resultSet.getString("payment"));
-                receiptEntity.setCardId(resultSet.getInt("card_id"));
-                receiptEntity.setStoreId(resultSet.getInt("store_id"));
                 break;
             }
             return receiptEntity;
@@ -76,6 +74,21 @@ public class ReceiptRepository extends BaseRepository implements Repository<Rece
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
+    }
+
+    public Integer getCardIdWithReceiptId(Integer receiptId){
+        Integer cardId = null;
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement
+                ("SELECT card_id FROM receipt WHERE `receipt_id` = " + receiptId);
+             ResultSet resultSet = preparedStatement.executeQuery()){
+            while (resultSet.next()) {
+                cardId = resultSet.getInt("card_id");
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return cardId;
     }
 
 }

@@ -1,27 +1,24 @@
 package orgprimeholding.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
+import orgprimeholding.annotations.Column;
+import orgprimeholding.annotations.Id;
+
 import java.time.LocalDateTime;
 
 public class ReceiptEntity {
     @Id
     private int id;
 
-    @Column(name = "total")
+    @Column
     private double total;
 
-    @Column(name = "datetime")
+    @Column
     private LocalDateTime dateTime;
 
-    @Column(name = "payment")
+    @Column
     private String payment;
 
     private CardDetailsEntity card;
-
-    private Integer cardId;
-
-    private Integer storeId;
 
     public ReceiptEntity() {
         /* We need empty constructor, because some fields might be null*/
@@ -65,21 +62,5 @@ public class ReceiptEntity {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Integer getCardId() {
-        return this.cardId;
-    }
-
-    public void setCardId(Integer cardId) {
-        this.cardId = cardId;
-    }
-
-    public Integer getStoreId() {
-        return this.storeId;
-    }
-
-    public void setStoreId(Integer storeId) {
-        this.storeId = storeId;
     }
 }

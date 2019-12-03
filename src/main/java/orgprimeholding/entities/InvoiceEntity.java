@@ -1,33 +1,26 @@
 package orgprimeholding.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import orgprimeholding.annotations.Column;
+import orgprimeholding.annotations.Id;
+
 import java.time.LocalDateTime;
 
-@Table
 public class InvoiceEntity {
     @Id
     private int id;
 
-    @Column(name = "total")
+    @Column
     private double total;
 
-    @Column(name = "datetime")
+    @Column
     private LocalDateTime dateTime;
 
-    @Column(name = "payment")
+    @Column
     private String payment;
 
     private CustomerEntity customer;
 
     private CardDetailsEntity card;
-
-    private Integer customerId;
-
-    private Integer storeId;
-
-    private Integer cardId;
 
     public InvoiceEntity() {
         /* We need empty constructor, because some fields might be null*/
@@ -81,27 +74,4 @@ public class InvoiceEntity {
         this.id = id;
     }
 
-    public Integer getCustomerId() {
-        return this.customerId;
-    }
-
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
-
-    public Integer getStoreId() {
-        return this.storeId;
-    }
-
-    public void setStoreId(Integer storeId) {
-        this.storeId = storeId;
-    }
-
-    public Integer getCardId() {
-        return this.cardId;
-    }
-
-    public void setCardId(Integer cardId) {
-        this.cardId = cardId;
-    }
 }

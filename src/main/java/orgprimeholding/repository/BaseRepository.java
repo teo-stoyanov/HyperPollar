@@ -1,6 +1,7 @@
 package orgprimeholding.repository;
 
-import javax.persistence.Column;
+import orgprimeholding.annotations.Column;
+
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

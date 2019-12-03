@@ -52,9 +52,6 @@ public class InvoiceRepository extends BaseRepository implements Repository<Invo
                 String dateTime = resultSet.getString("datetime");
                 invoiceEntity.setDateTime(LocalDateTime.parse(dateTime, formatter));
                 invoiceEntity.setPayment(resultSet.getString("payment"));
-                invoiceEntity.setCustomerId(resultSet.getInt("customer_id"));
-                invoiceEntity.setStoreId(resultSet.getInt("store_id"));
-                invoiceEntity.setCardId(resultSet.getInt("card_id"));
                 break;
             }
             return invoiceEntity;
@@ -62,6 +59,36 @@ public class InvoiceRepository extends BaseRepository implements Repository<Invo
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
         return null;
+    }
+
+    public Integer getCardIdWithInvoiceId(Integer invoiceId){
+        Integer cardId = null;
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement
+                ("SELECT card_id FROM invoice WHERE `invoice_id` = " + invoiceId);
+             ResultSet resultSet = preparedStatement.executeQuery()){
+            while (resultSet.next()) {
+                cardId = resultSet.getInt("card_id");
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return cardId;
+    }
+
+    public Integer getCustomerIdWithInvoiceId(Integer invoiceId){
+        Integer cardId = null;
+        try (PreparedStatement preparedStatement = super.getConnection().prepareStatement
+                ("SELECT customer_id FROM invoice WHERE `invoice_id` = " + invoiceId);
+             ResultSet resultSet = preparedStatement.executeQuery()){
+            while (resultSet.next()) {
+                cardId = resultSet.getInt("customer_id");
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+        }
+
+        return cardId;
     }
 
     public void setStoreId(Integer storeId, Integer invoiceId) {
